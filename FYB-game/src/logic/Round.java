@@ -18,13 +18,12 @@ public class Round {
 	
 	private Deck roundDeck;
 	
+	private Player[] players;
+	
 	
 	private void dealHands () {
-		for (int i = 0; i < cardNumber; i++) {
-			for (int j = 0; j < numPlayers; j++) {
-				Card next = roundDeck.draw();
-				// Add card to player j's hand
-			}
+		for (int i = 0; i < numPlayers; i++) {
+			players[i].dealHand(cardNumber, roundDeck);
 		}
 		
 		if (inverseRound) {
@@ -91,7 +90,7 @@ public class Round {
 	 * @param numPlayers  The number of players in the round
 	 * @param dealerNumber The player that is dealer for the current round (determines play order)
 	 */
-	public Round (int roundNumber, int numPlayers, int dealerNumber) {
+	public Round (int roundNumber, int numPlayers, int dealerNumber, Player[] players) {
 		this.roundNumber = roundNumber;
 		this.numPlayers = numPlayers;
 		this.dealerNumber = dealerNumber;
@@ -104,7 +103,9 @@ public class Round {
 		this.tricksTaken = new int[numPlayers];
 		this.betsMade = new int[numPlayers];
 		
-		this.roundDeck = new Deck(); // Deck always starts fresh 
+		this.roundDeck = new Deck(); // Deck always starts fresh
+		
+		this.players = players;
 		
 		Arrays.fill(tricksTaken, 0); // Start with zero tricks taken per player
 		

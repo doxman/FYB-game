@@ -17,8 +17,11 @@ public class Deck {
 	/**
 	 * Simulates drawing a card
 	 * @return The top card in the deck
+	 * @throws IllegalStateException if deck is empty
 	 */
-	public Card draw() {
+	public Card draw() throws IllegalStateException {
+		if (cards.size() == 0)
+			throw new IllegalStateException();
 		return cards.remove(0);
 	}
 	
@@ -31,7 +34,7 @@ public class Deck {
 	}
 	
 	/**
-	 * Initializes the deck with 52 cards
+	 * Initializes the deck with 52 cards and shuffles it
 	 */
 	public Deck() {
 		for (int suit = 1; suit <= 4; suit++) {
